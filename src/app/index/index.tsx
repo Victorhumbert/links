@@ -1,4 +1,11 @@
-import { Image, View, TouchableOpacity, FlatList } from "react-native";
+import {
+  Image,
+  View,
+  TouchableOpacity,
+  FlatList,
+  Modal,
+  Text,
+} from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import { styles } from "@/app/index/styles";
@@ -33,6 +40,31 @@ export default function Index() {
         contentContainerStyle={styles.linksContainer}
         showsVerticalScrollIndicator={false}
       />
+
+      <Modal
+        // visible={isModalVisible}
+        animationType="slide"
+      >
+        <View style={styles.modal}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.category}>Curso</Text>
+              
+              <TouchableOpacity>
+                <MaterialIcons
+                  name="close"
+                  size={20}
+                  color={colors.gray[400]}
+                />
+              </TouchableOpacity>
+            </View>
+
+            <Text style={styles.modalLinkName}>Rocketseat</Text>
+
+            <Text style={styles.modalUrl}>https://www.rocketseat.com.br</Text>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
