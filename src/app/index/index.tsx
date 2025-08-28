@@ -12,6 +12,7 @@ import { styles } from "@/app/index/styles";
 import { colors } from "@/styles/colors";
 import { Categories } from "@/components/categories";
 import { Link } from "@/components/link";
+import { Option } from "@/components/option";
 
 export default function Index() {
   return (
@@ -50,7 +51,7 @@ export default function Index() {
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
               <Text style={styles.category}>Curso</Text>
-              
+
               <TouchableOpacity>
                 <MaterialIcons
                   name="close"
@@ -61,8 +62,12 @@ export default function Index() {
             </View>
 
             <Text style={styles.modalLinkName}>Rocketseat</Text>
-
             <Text style={styles.modalUrl}>https://www.rocketseat.com.br</Text>
+
+            <View style={styles.modalFooter}>
+              <Option name="Excluir" icon="delete" variant="secondary" />
+              <Option name="Abrir" icon="language" />
+            </View>
           </View>
         </View>
       </Modal>
