@@ -43,6 +43,7 @@ export default function Index() {
 
       <Modal
         // visible={isModalVisible}
+        transparent
         animationType="slide"
       >
         <View style={styles.modal}>
