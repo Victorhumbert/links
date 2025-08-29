@@ -1,20 +1,37 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Alert } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useState } from "react";
 import { router } from "expo-router";
+import { useState } from "react";
 
 import { styles } from "./styles";
 import { colors } from "@/styles/colors";
 import { Categories } from "@/components/categories";
 import { Input } from "@/components/input";
 import { Button } from "@/components/button";
+import { categories } from "@/utils/categories";
 
 export default function Add() {
+  const [category, setCategory] = useState('');
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
 
   function handleAdd() {
-    console.log({ name, url });
+    if(!category) {
+      Alert.alert("Categoria", "Selecione uma categoria");
+      return;
+    }
+
+    if(!name.trim()) {
+      Alert.alert("Nome", "Informe um nome");
+      return;
+    }
+
+    if(!url.trim()) {
+      Alert.alert("URL", "Informe uma URL");
+      return;
+    }
+
+    console.log({category, name, url });
   }
 
   return (
@@ -29,14 +46,14 @@ export default function Add() {
 
       <Text style={styles.label}>Selecione uma categoria</Text>
 
-      <Categories />
+      <Categories selectedCategory={category} onSelectCategory={setCategory} />
 
       <View style={styles.form}>
         <Input placeholder="Nome" onChangeText={setName} autoCorrect={false} />
-        <Input placeholder="Url" onChangeText={setUrl} autoCorrect={false} />
+        <Input placeholder="URL" onChangeText={setUrl} autoCorrect={false} />
         <Button title="Adicionar" onPress={handleAdd} />
       </View>
-        <Text style={styles.title}>{name}</Text>
+      <Text style={styles.title}>{name}</Text>
     </View>
   );
 }
