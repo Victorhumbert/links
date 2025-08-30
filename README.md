@@ -79,7 +79,7 @@ src/
 
 ```bash
 # Clone o repositório
-git clone <url-do-repositorio>
+git clone https://github.com/Victorhumbert/links.git
 
 # Navegue até a pasta do projeto
 cd links
@@ -140,7 +140,3 @@ Durante meus estudos e desenvolvimento deste projeto, pude aprender e aplicar co
 ## 📄 Licença
 
 Projeto desenvolvido para fins educacionais durante meus estudos na Rocketseat.
-
----
-
-Desenvolvido com 💜 durante meus estudos no curso de React Native da [Rocketseat](https://rocketseat.com.br)
