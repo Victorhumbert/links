@@ -25,8 +25,11 @@ export default function Index() {
 
   async function getLinks() {
     try {
-      const data = await linkStorage.get();
-      setLinks(data);
+      const response = await linkStorage.get();
+
+      const filtered = response.filter((link) => link.category === category);
+
+      setLinks(filtered);
     } catch (error) {
       Alert.alert("Erro", "Não foi possível listar os links.");
       console.log(error);
@@ -36,7 +39,7 @@ export default function Index() {
   useFocusEffect(
     useCallback(() => {
       getLinks();
-    }, [])
+    }, [category])
   );
 
   return (
