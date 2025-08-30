@@ -20,8 +20,12 @@ import { categories } from "@/utils/categories";
 import { LinkStorage, linkStorage } from "@/storage/link-storage";
 
 export default function Index() {
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [category, setCategory] = useState(categories[0].name);
   const [links, setLinks] = useState<LinkStorage[]>([]);
+  const [selectedLink, setSelectedLink] = useState<LinkStorage>(
+    {} as LinkStorage
+  );
 
   async function getLinks() {
     try {
@@ -34,6 +38,11 @@ export default function Index() {
       Alert.alert("Erro", "Não foi possível listar os links.");
       console.log(error);
     }
+  }
+
+  function handleDetails(selected: LinkStorage) {
+    setSelectedLink(selected);
+    setIsModalVisible(true);
   }
 
   useFocusEffect(
@@ -61,7 +70,7 @@ export default function Index() {
           <Link
             name={item.name}
             url={item.url}
-            onDetails={() => console.log("Clicou!!")}
+            onDetails={() => handleDetails(item)}
           />
         )}
         style={styles.links}
@@ -69,18 +78,13 @@ export default function Index() {
         showsVerticalScrollIndicator={false}
       />
 
-      <Modal
-        // visible={isModalVisible}
-        visible={false}
-        transparent
-        animationType="slide"
-      >
+      <Modal visible={isModalVisible} transparent animationType="slide">
         <View style={styles.modal}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
-              <Text style={styles.category}>Curso</Text>
+              <Text style={styles.category}>{selectedLink?.category}</Text>
 
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => setIsModalVisible(false)}>
                 <MaterialIcons
                   name="close"
                   size={20}
@@ -89,8 +93,8 @@ export default function Index() {
               </TouchableOpacity>
             </View>
 
-            <Text style={styles.modalLinkName}>Rocketseat</Text>
-            <Text style={styles.modalUrl}>https://www.rocketseat.com.br</Text>
+            <Text style={styles.modalLinkName}>{selectedLink?.name}</Text>
+            <Text style={styles.modalUrl}>{selectedLink?.url}</Text>
 
             <View style={styles.modalFooter}>
               <Option name="Excluir" icon="delete" variant="secondary" />
